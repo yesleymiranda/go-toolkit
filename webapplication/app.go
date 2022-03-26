@@ -9,21 +9,32 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type App struct {
-	port   string
-	Router *mux.Router
+type ApplicationConfig struct {
+	Port     string
+	WithPing bool
 }
 
-func New(port string) *App {
+type App struct {
+	port     string
+	withPing bool
+	Router   *mux.Router
+}
+
+func New(config *ApplicationConfig) *App {
 	return &App{
-		port:   port,
-		Router: mux.NewRouter().StrictSlash(true),
+		port:     config.Port,
+		withPing: config.WithPing,
+		Router:   mux.NewRouter().StrictSlash(true),
 	}
 }
 
 func (app *App) Initialize() {
 	logger.Init()
 	logger.Info("start app...")
+
+	if app.withPing {
+		NewPingHandler(app)
+	}
 }
 
 func (app *App) ListenAndServe() error {
