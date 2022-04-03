@@ -10,6 +10,5 @@ func getPing(w http.ResponseWriter, _ *http.Request) {
 }
 
 func NewPingHandler(app *App) {
-	app.Router.HandleFunc("/", getPing).Methods("GET")
 	app.Router.HandleFunc("/ping", getPing).Methods("GET")
 }
