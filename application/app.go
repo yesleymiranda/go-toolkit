@@ -1,6 +1,9 @@
 package application
 
 import (
+	"fmt"
+	"net/http"
+
 	"github.com/go-chi/chi"
 	"github.com/yesleymiranda/go-toolkit/logger"
 )
@@ -35,4 +38,11 @@ func (app *App) Initialize() {
 	if app.withPing {
 		NewPingHandler(app)
 	}
+}
+
+// ListenAndServe listen and serve web application
+func (app *App) ListenAndServe() error {
+	address := fmt.Sprintf(":%v", app.port)
+	logger.Info(fmt.Sprintf("app on address:%v", address))
+	return http.ListenAndServe(address, app.Router)
 }
