@@ -20,7 +20,8 @@ type App struct {
 	Router   *mux.Router
 }
 
-// New Deprecated use Application.new()
+// deprecated
+// use pkg application
 func New(config *ApplicationConfig) *App {
 	return &App{
 		port:     config.Port,
@@ -29,7 +30,8 @@ func New(config *ApplicationConfig) *App {
 	}
 }
 
-// Initialize Deprecated use Application.new()
+// deprecated
+// use pkg application
 func (app *App) Initialize() {
 	logger.Init()
 	logger.Info("start app...")
@@ -39,7 +41,8 @@ func (app *App) Initialize() {
 	}
 }
 
-// ListenAndServe Deprecated use Application.new()
+// deprecated
+// use pkg application
 func (app *App) ListenAndServe() error {
 	address := fmt.Sprintf(":%v", app.port)
 	logger.Info(fmt.Sprintf("app on address:%v", address))
